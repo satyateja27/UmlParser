@@ -23,7 +23,7 @@ public class CuPrinter {
         source += "@enduml\n";
 
         System.out.println("****UML Souce****");
-        System.out.println(source);
+        //System.out.println(source);
 
         SourceStringReader reader = new SourceStringReader(source); // Read from the source String
 

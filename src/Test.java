@@ -1,7 +1,7 @@
 
 public class Test {
-private String str;
-public int hello(){
-	return 0;
-}
+	private String hello;
+	public String getHello(){
+		return hello;
+	}
 }

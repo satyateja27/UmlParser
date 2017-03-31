@@ -37,4 +37,18 @@ public class Test {
 		sb.append("@enduml");
 		diagram(sb.toString());
 	}
+
+	private ClassOrInterfaceDeclaration getClassOrInterfaceNode(CompilationUnit cu){
+			ClassOrInterfaceDeclaration c = null;
+			List<TypeDeclaration> types = cu.getTypes();
+			if(types != null){
+				for(TypeDeclaration type : types){
+					if(type instanceof ClassOrInterfaceDeclaration){
+						return (ClassOrInterfaceDeclaration)type;
+					}
+				}
+			}
+			return c;
+		}
+
 }

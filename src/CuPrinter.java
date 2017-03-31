@@ -25,18 +25,10 @@ public class CuPrinter {
         System.out.println("****UML Souce****");
         //System.out.println(source);
 
-        SourceStringReader reader = new SourceStringReader(source); // Read from the source String
+				diagram(String source){
 
-        OutputStream png = new FileOutputStream("/Users/satya/Documents/Workspace/UmlParser/Output.png"); // Create Target File for Output
+				}
 
-        String desc = reader.generateImage(png); // Write the first image to "png"
-
-        System.out.println("****Output Message****");
-        if(desc != null){
-        	System.out.println("UML Successfully Rendered");
-        }else{
-        	System.out.println("UML Generation Unsuccessful");
-        }
 
 	}
 

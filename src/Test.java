@@ -39,16 +39,15 @@ public class Test {
 	}
 
 	private ClassOrInterfaceDeclaration getClassOrInterfaceNode(CompilationUnit cu){
-			ClassOrInterfaceDeclaration c = null;
-			List<TypeDeclaration> types = cu.getTypes();
-			if(types != null){
-				for(TypeDeclaration type : types){
-					if(type instanceof ClassOrInterfaceDeclaration){
-						return (ClassOrInterfaceDeclaration)type;
-					}
+		ClassOrInterfaceDeclaration c = null;
+		List<TypeDeclaration> types = cu.getTypes();
+		if(types != null){
+			for(TypeDeclaration type : types){
+				if(type instanceof ClassOrInterfaceDeclaration){
+					return (ClassOrInterfaceDeclaration)type;
 				}
 			}
-			return c;
 		}
-
+		return c;
+	}
 }

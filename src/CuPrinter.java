@@ -30,7 +30,14 @@ public class CuPrinter {
 
 	        OutputStream png = new FileOutputStream("/Users/satya/Documents/Workspace/UmlParser/Output.png"); // Create Target File for Output
 
-	        String desc = reader.generateImage(png); // Write the first image to "png"
+	        String desc = null; // Write the first image to "png"
+
+					try {
+						OutputStream png = new FileOutputStream("/Users/satya/Documents/Workspace/UmlParser/Output.png"); // Create Target File for Output
+						desc = reader.generateImage(png); // Write the first image to "png"
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 
 	        System.out.println("****Output Message****");
 	        if(desc != null){

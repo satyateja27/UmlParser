@@ -22,8 +22,7 @@ public class CuPrinter {
         source += "+getHello() : String\n}\n";
         source += "@enduml\n";
 
-        System.out.println("****UML Souce****");
-        //System.out.println(source);
+        //System.out.println("****UML Souce****");
 
 				diagram(String source){
 

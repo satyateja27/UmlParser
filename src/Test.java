@@ -29,6 +29,12 @@ public class Test {
 			}
 		}
 
-		
+		sb.append("@startuml\n");
+		sb.append("skinparam classAttributeIconSize 0\n");
+		for (Map.Entry<String, ClassOrInterfaceDeclaration> entry : map.entrySet()) {
+            getClassOrInterfaceSignature(entry.getValue());
+        }
+		sb.append("@enduml");
+		diagram(sb.toString());
 	}
 }

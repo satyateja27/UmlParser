@@ -50,4 +50,41 @@ public class Test {
 		}
 		return c;
 	}
+
+	private void getClassOrInterfaceSignature(ClassOrInterfaceDeclaration c){
+
+			if(c.isInterface()){
+				sb.append("interface ");
+				sb.append(c.getName());
+				sb.append(" {\n");
+				sb.append("}\n");
+			}else{
+				sb.append("class ");
+				sb.append(c.getName());
+				sb.append(" {\n");
+				sb.append("}\n");
+			}
+
+			List<ClassOrInterfaceType> extendsContent = c.getExtends();
+			if(extendsContent != null){
+				for(ClassOrInterfaceType type : extendsContent){
+					String name = type.getName();
+					if(map.containsKey(name)){
+						sb.append(name + " <-- " + type.getName());
+					}
+				}
+			}
+
+			List<ClassOrInterfaceType> implementsContent = c.getImplements();
+			if(implementsContent != null){
+				for(ClassOrInterfaceType type : implementsContent){
+					String name = type.getName();
+					if(map.containsKey(name)){
+						sb.append(name + " <-- " + type.getName());
+					}
+				}
+			}
+
+		}
+
 }

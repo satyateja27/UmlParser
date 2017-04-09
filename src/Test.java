@@ -87,4 +87,23 @@ public class Test {
 
 		}
 
+		public void diagram(String source){
+
+		SourceStringReader reader = new SourceStringReader(source); // Read from the source String
+        String desc = null;
+
+		try {
+			OutputStream png = new FileOutputStream(outputFile); // Create Target File for Output
+			desc = reader.generateImage(png); // Write the first image to "png"
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+        if(desc != null){
+        	System.out.println("UML Successfully Rendered");
+        }else{
+        	System.out.println("UML Generation Unsuccessful");
+        }
+	}
+
 }

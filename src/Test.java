@@ -102,7 +102,24 @@ public class Test {
 				}
 			}
 
-			
+			private void parseBody(CompilationUnit cu){
+		List<TypeDeclaration> types = cu.getTypes();
+		if(types != null){
+			for(TypeDeclaration type: types){
+				List<BodyDeclaration> bodyDeclaration = type.getMembers();
+				for(BodyDeclaration body : bodyDeclaration){
+					if(body instanceof FieldDeclaration){
+						parseField((FieldDeclaration)body);
+					}else if(body instanceof MethodDeclaration){
+						parseMethod((FieldDeclaration)body);
+					}else if(body instanceof ConstructorDeclaration){
+						parseConstructor((FieldDeclaration)body);
+					}
+				}
+			}
+		}
+		sb.append("}");
+	}
 
 		public void diagram(String source){
 

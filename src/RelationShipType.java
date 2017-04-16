@@ -1,10 +1,9 @@
 public enum RelationShipType {
 
-	EX("<|--"),
-    IM("<|.."),
-    AS("--"),
-    DEP("<.."),
-    LOLI("()--");
+	EXTEND("<|--"),
+    IMPLEMENT("<|.."),
+    ASSOCIATION("--"),
+    DEPENDENCY("<.."),
 
     private String s;
     RelationShipType(String s) {

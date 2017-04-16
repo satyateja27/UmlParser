@@ -87,6 +87,23 @@ public class Test {
 
 		}
 
+		private void parseClassOrInterface(CompilationUnit cu){
+				List<TypeDeclaration> types = cu.getTypes();
+				if(types != null){
+					for(TypeDeclaration type : types){
+						if(type instanceof ClassOrInterfaceDeclaration){
+							if(((ClassOrInterfaceDeclaration)type).isInterface()){
+								sb.append("interface ").append(type.getName()).append(" <<interface>> {\n");
+							}else{
+								sb.append("class ").append(type.getName()).append(" {\n");
+							}
+						}
+					}
+				}
+			}
+
+			
+
 		public void diagram(String source){
 
 		SourceStringReader reader = new SourceStringReader(source); // Read from the source String

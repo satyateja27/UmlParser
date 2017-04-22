@@ -151,7 +151,28 @@ public class Parse {
 		cb.append(") : ").append("\n");
 	}
 
-
+//  parsing Extended Class or Implemented Interface starts her
+	private void parseImplementsExtends(CompilationUnit cu){
+		List<TypeDeclaration> types = cu.getTypes();
+		if(types != null){
+			for(TypeDeclaration type : types){
+				if(type instanceof ClassOrInterfaceDeclaration){
+					List<ClassOrInterfaceType> extendsContent = ((ClassOrInterfaceDeclaration) type).getExtends();
+					if(extendsContent != null){
+						for(ClassOrInterfaceType content : extendsContent){
+							cb.append(content).append(" <|-- ").append(type.getName()).append("\n");
+						}
+					}
+					List<ClassOrInterfaceType> implementsContent = ((ClassOrInterfaceDeclaration) type).getImplements();
+					if(implementsContent != null){
+						for(ClassOrInterfaceType content : implementsContent){
+							cb.append(content).append(" <|.. ").append(type.getName()).append("\n");
+						}
+					}
+				}
+			}
+		}
+	}
 
 //	UML diagram generation starts here
 	private void diagram(String source){

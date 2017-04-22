@@ -118,6 +118,22 @@ public class Parse {
 		cb.append(modifier).append(" ").append(name).append(" : ").append(field.getType()).append("\n");
 	}
 
+//	parsing Method starts here
+//	ignoring private, protected & package scope for methods
+	private void parseMethod(MethodDeclaration body){
+		cb.append("+ ").append(body.getName()).append("(");
+		int count = 1;
+		if(body.getParameters() != null){
+			for(Parameter p : body.getParameters()){
+				if(count>1 && count<=body.getParameters().size()){
+					cb.append(", ");
+				}
+				cb.append(p.getId().getName()).append(" : ").append(p.getType());
+				count ++;
+			}
+		}
+		cb.append(") : ").append(body.getType()).append("\n");
+	}
 
 
 //	UML diagram generation starts here

@@ -135,6 +135,23 @@ public class Parse {
 		cb.append(") : ").append(body.getType()).append("\n");
 	}
 
+//	parsing Constructor starts here
+	private void parseConstructor(ConstructorDeclaration body){
+		cb.append("+ ").append(body.getName()).append("(");
+		int count = 1;
+		if(body.getParameters() != null){
+			for(Parameter p : body.getParameters()){
+				if(count>1 && count<=body.getParameters().size()){
+					cb.append(", ");
+				}
+				cb.append(p.getId().getName()).append(" : ").append(p.getType());
+				count ++;
+			}
+		}
+		cb.append(") : ").append("\n");
+	}
+
+
 
 //	UML diagram generation starts here
 	private void diagram(String source){

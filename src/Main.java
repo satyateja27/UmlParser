@@ -8,6 +8,8 @@ public class Main {
 		args[0] = "test/uml-parser-test-" + index;
 		args[1] = "output " + index + ".png";
 		
+		
+		
 		Parse parse = new Parse(args[0]);
 		DrawUml diagram = new DrawUml(args[1]);
 		diagram.generateUml(parse.start());

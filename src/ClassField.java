@@ -7,6 +7,7 @@ public class ClassField {
 	public boolean hasMultiplicity;
 	public boolean hasGetter;
 	public boolean hasSetter;
+	public boolean isStatic;
 	
 	public ClassField(){
 		this.accessModifier = 'a';
@@ -16,6 +17,7 @@ public class ClassField {
 		this.hasMultiplicity = false;
 		this.hasGetter = false;
 		this.hasSetter = false;
+		this.isStatic = false;
 	}
 	
 }

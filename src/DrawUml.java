@@ -21,6 +21,11 @@ public class DrawUml {
 		this.outputFile = outputFile;
 	}
 	
+	/**
+	 * UML Diagram Generation starts from here
+	 * @param classes
+	 * @author satya
+	 */
 	public void generateUml(List<ClassBody> classes){
 		this.classes = classes;
 		cb.append("@startuml\n");
@@ -37,6 +42,7 @@ public class DrawUml {
 			cb.append("}\n");
 		}
 		addAssociationString();
+		addDependencyString();
 		cb.append(eib.toString());
 		cb.append(ab.toString());
 		cb.append(db.toString());
@@ -45,21 +51,35 @@ public class DrawUml {
 		diagram(cb.toString());
 	}
 	
+	
+	/**
+	 * String required for fields or attributes generation is appended here
+	 * @param classBody
+	 * @author satya
+	 */
 	private void addFieldString(ClassBody classBody){
 		for(ClassField field : classBody.fields){
 			if(!field.hasAssociation){
 				if(field.accessModifier == '+' || field.accessModifier == '-'){
+					cb.append(field.isStatic ? "{static} " : "");
 					cb.append(field.accessModifier).append(" ").append(field.fieldName).append(" : ").append(field.returnType).append("\n");
 				}
 			}
 		}
 	}
 	
+	
+	/**
+	 * String required for methods or operation generation is appended here
+	 * @param classBody
+	 * @author satya
+	 */
 	private void addMethodString(ClassBody classBody){
 		for(ClassMethod method : classBody.methods){
 			if(method.accessModifier == '+' && !method.isGetterSetter){
-				cb.append(method.isStatic ? "{static} + " : "+ ");
-				cb.append(method.methodName).append("(");
+				cb.append(method.isStatic ? "{static} " : "");
+				cb.append(method.isAbstract ? "{abstract} " : "");
+				cb.append("+ ").append(method.methodName).append("(");
 				int count = 1;
 				if(method.parameters != null){
 					for(Parameter p : method.parameters){
@@ -79,6 +99,12 @@ public class DrawUml {
 		}
 	}
 	
+	
+	/**
+	 * String required for extends and implements relationship generation is appended here
+	 * @param classBody
+	 * @author satya
+	 */
 	private void addExtendsImplementString(ClassBody classBody){
 		if(classBody.extendsContent != null){
 			for(ClassOrInterfaceType content : classBody.extendsContent){
@@ -92,6 +118,11 @@ public class DrawUml {
 		}
 	}
 	
+	
+	/**
+	 * String required for association relationship generation is appended here
+	 * @author satya
+	 */
 	private void addAssociationString(){
 		for(Map.Entry<String, List<String>> entry : Parse.associationMap.entrySet()){
 			if(entry.getValue().size() > 0){
@@ -106,6 +137,13 @@ public class DrawUml {
 		}
 	}
 	
+	
+	/**
+	 * Multiplicity check for fields starts here
+	 * @param sourceClass
+	 * @param targetClass
+	 * @author satya
+	 */
 	private boolean getMultiplicity(String sourceClass, String targetClass){
 		for(ClassBody classBody : classes){
 			if(classBody.className.equals(sourceClass)){
@@ -131,6 +169,27 @@ public class DrawUml {
 		return false;
 	}
 	
+	
+	/**
+	 * String required for dependency relationship generation is appended here
+	 * @author satya
+	 */
+	private void addDependencyString(){
+		for(Map.Entry<String, List<String>> entry : Parse.dependencyMap.entrySet()){
+			if(entry.getValue().size() > 0){
+				for(String name : entry.getValue()){
+					db.append(entry.getKey()).append(" ..> ").append(name).append("\n");
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * Output diagram generation starts here
+	 * @param source
+	 * @author satya
+	 */
 	private void diagram(String source){
 		SourceStringReader reader = new SourceStringReader(source); // Read from the source String
         String desc = null;

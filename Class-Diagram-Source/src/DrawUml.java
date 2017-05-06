@@ -46,8 +46,8 @@ public class DrawUml {
 		cb.append(eib.toString());
 		cb.append(ab.toString());
 		cb.append(db.toString());
+		cb.append("hide circle\n");
 		cb.append("@enduml");
-		System.out.println(cb.toString());
 		diagram(cb.toString());
 	}
 	

@@ -63,9 +63,11 @@ public aspect SequenceAspect {
 	}
 	
 	
-	/*
-	 * The PlantUML grammar required for generating class diagram
+	/**
+	 * The plantUML grammar required for generating class diagram
 	 * is generated here
+	 * @param jp
+	 * @author satya
 	 */
 	private String getUmlGrammar(JoinPoint jp){
 		String methodSignature = getMethodSignature(jp);
@@ -86,8 +88,10 @@ public aspect SequenceAspect {
 	}
 	
 	
-	/*
+	/**
 	 * Method Signature is generated here
+	 * @param jp
+	 * @author satya
 	 */
 	private String getMethodSignature(JoinPoint jp){
 		MethodSignature signature = (MethodSignature) jp.getStaticPart().getSignature();
@@ -106,8 +110,11 @@ public aspect SequenceAspect {
 	}
 	
 	
-	/*
+	/**
 	 * Class Diagram Image generation starts here
+	 * @param source
+	 * @param outputFile
+	 * @author satya
 	 */
 	private void diagram(String source, String outputFile){
 		SourceStringReader reader = new SourceStringReader(source); // Read from the source String

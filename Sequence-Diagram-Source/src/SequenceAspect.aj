@@ -1,7 +1,6 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Stack;
 
 import org.aspectj.lang.JoinPoint;
@@ -36,7 +35,6 @@ public aspect SequenceAspect {
 				sb.append("@startuml\n");
 				sb.append("skinparam classAttributeIconSize 0\n");
 				sb.append("hide footbox\n");
-//				sb.append("activate ").append(targetClass).append("\n");
 				statusStack.push("unactive");
 			}else{
 				targetClass = getUmlGrammar(thisJoinPoint);
@@ -64,6 +62,11 @@ public aspect SequenceAspect {
 		}
 	}
 	
+	
+	/*
+	 * The PlantUML grammar required for generating class diagram
+	 * is generated here
+	 */
 	private String getUmlGrammar(JoinPoint jp){
 		String methodSignature = getMethodSignature(jp);
 		String targetClass = jp.getTarget().toString();
@@ -82,6 +85,10 @@ public aspect SequenceAspect {
 		return targetClass;
 	}
 	
+	
+	/*
+	 * Method Signature is generated here
+	 */
 	private String getMethodSignature(JoinPoint jp){
 		MethodSignature signature = (MethodSignature) jp.getStaticPart().getSignature();
 		String[] parameterNames = signature.getParameterNames();
@@ -98,6 +105,10 @@ public aspect SequenceAspect {
 		return mn.toString();
 	}
 	
+	
+	/*
+	 * Class Diagram Image generation starts here
+	 */
 	private void diagram(String source, String outputFile){
 		SourceStringReader reader = new SourceStringReader(source); // Read from the source String
         String desc = null;

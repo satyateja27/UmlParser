@@ -1,6 +1,7 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Stack;
 
 import org.aspectj.lang.JoinPoint;
@@ -13,6 +14,7 @@ public aspect SequenceAspect {
 	private int methodExecutionCount;
 	private int constructorCallCount;
 	private Stack<String> classStack = new Stack<String>();
+	private Stack<String> statusStack = new Stack<String>();
 	private StringBuilder sb = new StringBuilder();
 	
 	pointcut methodExecution() : execution(* *.*(..)) && !within(SequenceAspect);
@@ -27,7 +29,6 @@ public aspect SequenceAspect {
 	}
 	
 	before(): methodExecution(){
-		System.out.println(constructorCallCount);
 		if(constructorCallCount == 0){
 			String targetClass;
 			if(methodExecutionCount==0){
@@ -35,9 +36,11 @@ public aspect SequenceAspect {
 				sb.append("@startuml\n");
 				sb.append("skinparam classAttributeIconSize 0\n");
 				sb.append("hide footbox\n");
-				sb.append("activate ").append(targetClass).append("\n");
+//				sb.append("activate ").append(targetClass).append("\n");
+				statusStack.push("unactive");
 			}else{
 				targetClass = getUmlGrammar(thisJoinPoint);
+				statusStack.push("active");
 			}
 			classStack.push(targetClass);
 			methodExecutionCount++;
@@ -49,6 +52,10 @@ public aspect SequenceAspect {
 			methodExecutionCount--;
 			sb.append("deactivate ").append(classStack.peek()).append("\n");
 			classStack.pop();
+			statusStack.pop();
+			if(!classStack.isEmpty() && statusStack.peek().equals("unactive")){
+				sb.append("deactivate ").append(classStack.peek()).append("\n");
+			}
 			if(methodExecutionCount==0){
 				sb.append("@enduml");
 				System.out.println(sb.toString());
@@ -68,6 +75,9 @@ public aspect SequenceAspect {
 		}
 		sb.append(classStack.peek()).append(" -> ").append(targetClass);
 		sb.append(" : ").append(methodSignature).append("\n");
+		if(statusStack.peek().equals("unactive")){
+			sb.append("activate ").append(classStack.peek()).append("\n");
+		}
 		sb.append("activate ").append(targetClass).append("\n");
 		return targetClass;
 	}

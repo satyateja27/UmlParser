@@ -193,9 +193,16 @@ public class DrawUml {
 	private void diagram(String source){
 		SourceStringReader reader = new SourceStringReader(source); // Read from the source String
         String desc = null;
+        
 		try {
-			OutputStream png = new FileOutputStream(outputFile); // Create Target File for Output
-			desc = reader.generateImage(png); // Write the image generation result
+			
+			if(outputFile.contains(".png")){
+				OutputStream png = new FileOutputStream(outputFile); // Create Target File for Output
+				desc = reader.generateImage(png); // Write the image generation result
+			}else{
+				OutputStream png = new FileOutputStream(outputFile + ".png"); // Create Target File for Output
+				desc = reader.generateImage(png); // Write the image generation result
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

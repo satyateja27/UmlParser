@@ -8,4 +8,4 @@ This project uses the following tools
 
 2. **[PlantUML](http://plantuml.com/)** & **[GraphViz](http://plantuml.com/graphviz-dot)** for generating class diagrams.
 
-3. **AspectJ** for generating sequence diagram.
+3. **[AspectJ](https://eclipse.org/aspectj/doc/next/progguide/language-joinPoints.html)** for generating sequence diagram.

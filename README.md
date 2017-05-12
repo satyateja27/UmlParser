@@ -1,7 +1,11 @@
-UmlParser
+# UmlParser
 
-This is a Java based project which parses the given Java source code and generates the UML Class diagrams.
+This is a Java based project which generates the UML Class & Sequence diagrams by parsing the given Java source code.
 
-This project uses Java Parser for parsing the given Java source Code.
+This project uses the following tools
 
-This Project uses PlantUml & GraphViz for generating class diagrams.
+1. **[Javaparser](http://javaparser.org/index.html)** for parsing the given Java source Code.
+
+2. **[PlantUML](http://plantuml.com/)** & **[GraphViz](http://plantuml.com/graphviz-dot)** for generating class diagrams.
+
+3. **AspectJ** for generating sequence diagram.
